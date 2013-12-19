@@ -1,17 +1,33 @@
-﻿var m = require("./mongocon")
+var m = require("./mongocon")
 var blog_models = require("./blog_models");
 
-var Post = m.mongoose.model('BlogPost', blog_models.BlogPost);
-var post = new Post();
+//setting a variable from a model..
+var PostModel = m.mongoose.model('BlogPost', blog_models.BlogPost);
+var post = new PostModel();
 
 console.log(post)
-post.comments.push({ title: 'My comment' });
 
+post.title = 'Some title';
+post.body  = 'Some text';
+post.date  = Date.now();
 
-post.save(function (err) {
-  if (!err) console.log('Success!');
+//setting a title and author on a comment
+post.comments.push({
+    title: 'My comment',
+    author: 'Any author'
 });
 
-Post.find({}, function(err, doc){
-  console.log(doc)
+//save a post
+post.save(function (err) {
+    if (!err) console.log('Saved Successfully!');
+});
+
+//find all posts
+PostModel.find({}, function (err, doc) {
+    console.log(doc)
+})
+
+//delete all posts
+PostModel.remove({}, function (err, doc) {
+    console.log(doc)
 })
