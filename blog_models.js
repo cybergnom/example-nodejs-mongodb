@@ -1,10 +1,11 @@
-﻿var m = require("./mongocon")
+var m = require("./mongocon")
 
 var Schema = m.mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var Comments = new Schema({
   title: String,
+  author: String,
   body: String,
   date: Date
 });
